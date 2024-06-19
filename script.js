@@ -14,22 +14,6 @@ function usersLocationUpdated() { }
 // function heatMapUpdated() { }
 // function dataForHeatmap() { }
 // function heatmap() { }
-
-const socket = new WebSocket('ws:192.168.137.64:1880/ws/data');
-// DATA FORMAT TO SEND TO NODE FOR CONTROLLING WHEEL
-const data = {
-    speedValue: 0,
-    direction: ""
-};
-// SENDIG CONTROLLER DATAS TO THE NODE-RED
-
-var sensorData = [];
-// Initialize an empty array to store heatmap data
-var heatmapData = [];
-
-// Initialize the map object
-var map;
-
 const outerCircle = document.getElementById('outer-circle');
 const innerCircle = document.getElementById('inner-circle');
 const speedValue = document.getElementById('speed-value');
@@ -76,9 +60,9 @@ function drag(e) {
         innerCircle.style.transform = `translate(${newX}px, ${newY}px)`;
 
         // Update speed value based on distance
-        const distancePercentage = (clampedRadius / maxRadius) * 100;
+        const distancePercentage = (clampedRadius / maxRadius) * 50;
         const speed = Math.round(distancePercentage);
-        console.log("Speed Value" + speed);
+        // console.log("Speed Value" + speed);
 
         data.speedValue = speed;
         speedValue.textContent = speed;
@@ -124,7 +108,7 @@ function stopDrag() {
 
 function updateDirectionText(angle) {
     // const threshold = 0.22; // Adjust the threshold as needed
-    // console.log(angle);
+    
     if (angle == 0) {
         directionValue.textContent = 'STOP';
         data.direction = "stop";
@@ -166,6 +150,21 @@ function updateDirectionText(angle) {
 
     }
 }
+const socket = new WebSocket('ws:192.168.137.64:1880/ws/data');
+// DATA FORMAT TO SEND TO NODE FOR CONTROLLING WHEEL
+const data = {
+    speedValue: 0,
+    direction: ""
+};
+// SENDIG CONTROLLER DATAS TO THE NODE-RED
+
+var sensorData = [];
+// Initialize an empty array to store heatmap data
+var heatmapData = [];
+
+// Initialize the map object
+var map;
+
 
 function updateTimeEveryOneMinute() {
     function getCurrentTime12HourFormat() {
@@ -212,7 +211,7 @@ var longitudeForHeatMap;
 var sensorData = [];
 socket.onmessage = function (event) {
     const data = JSON.parse(event.data);
-    console.log("data: ", data);
+    // console.log("data: ", data);
 
     if (data.temperature !== undefined) {
         document.getElementById('temperature-value').textContent = data.temperature + ' °C';
