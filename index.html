@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Create Circles using Spatial Math." />
+  <meta name="keywords" content="Microsoft maps, map, gis, API, SDK, Bing, Bing Maps" />
+  <meta name="author" content="Microsoft Bing Maps" />
+  <meta name="screenshot" content="screenshot.jpg" />
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NBC BOT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="icon" type="image/x-icon" href="/Pictures/cdac_logo_favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+
+  <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto+Mono:wght@600&display=swap" rel="stylesheet"> -->
+  <!-- <script>
+    const bingKey = '';
+</script>
+<script src="https://www.bing.com/api/maps/mapcontrol?callback=loadMaps" async defer></script>
+
+</head> -->
+
+<script>
+  const bingKey = 'AiiQ9wg3CG2Eo_N5i3t1__j0DMX5otkY9FundxabMXUMKIIhMdxfeDs8LTQWdVCz';
+</script>
+<script src="https://www.bing.com/api/maps/mapcontrol?callback=loadMaps" async defer></script>
+
+<body>
+  <header class="header-container">
+    <img class="cdac-logo-image" alt="C-DAC Logo" src="Pictures/cdac_logo.png" />
+    <div class="nbc-controller-report-container">
+      <div class="nbc-controller">NBC CONTROLLER</div>
+      <div class="report">REPORT</div>
+      <!-- <button width="100px" id="fullscreenButton">Enter Fullscreen</button> -->
+    </div>
+  </header>
+  <div class="header-body-divider-container"></div>
+
+  <div class="main">
+
+    <div class="meteorological-data-left-container">
+
+      <h3 class="meteorological-data">METEOROLOGICAL DATA</h3>
+
+      <div class="temperature-container">
+        <div class="temp-logo-value">
+          <img class="image-2-icon" alt="" src="Pictures/temperature.png" />
+          <div id="temperature-value" class="temperature-value">-- °C</div>
+        </div>
+        <div class="temperature">Temperature</div>
+      </div>
+
+      <div class="humidity-container">
+        <div class="humid-logo-value">
+          <img class="image-2-icon1" alt="" src="Pictures/humidity.png" />
+          <div id="humidity-value" class="humidity-value">--%</div>
+        </div>
+        <div class="humidity">Humidity</div>
+      </div>
+
+      <div class="radiation-container">
+        <div class="radiation-logo-value">
+          <img class="image-2-1" alt="" src="Pictures/radiation.png" />
+          <div id="radiantion-value" class="radiation-value">-.- bq</div>
+        </div>
+        <div class="radiation">Radiation</div>
+      </div>
+
+      <div class="aqi-container">
+        <div class="aqi-logo-value">
+          <img class="output-onlinepngtools-1-icon" alt="" src="Pictures/aqi.png" />
+          <div id="aqi-value" class="aqi-value">-- ppm</div>
+        </div>
+        <div class="aqi">Air Quality Index</div>
+      </div>
+
+      <div class="CO-container">
+        <div class="CO-logo-value">
+          <img class="image-4-1" alt="" src="Pictures/carbon_monoxide.png" />
+          <div id="CO-value" class="CO-value">-- ppm</div>
+        </div>
+        <section class="CO">Carbon Monoxide</section>
+      </div>
+
+      <div class="h2s-container">
+        <div class="h2s-logo-value">
+          <img class="output-onlinepngtools-1-1" alt="" src="Pictures/hydrogen_sulphide.png" />
+          <div id="h2s-value" class="h2s-value">-.- ppm</div>
+        </div>
+        <div class="h2s">Hyrogen Sulphite</div>
+      </div>
+    </div>
+
+    <div class="body-main-middle-container"> <!-- Container for Time, Battery, Altitude, Camera and Map -->
+      <div class="time-battery-altitude-container">
+        <div class="time-container">
+          <p class="time">Time:</p>
+          <p id="time-value" class="time-value">--:--</p>
+        </div>
+        <div class="battery-container">
+          <p class="battery">Battery:</p>
+          <p class="battery-value">--%</p>
+        </div>
+        <div class="latitude-container">
+          <p class="latitude">Lati:</p>
+          <p id="latitude-value" class="latitude-value">--.----</p>
+        </div>
+        <div class="longitude-container">
+          <p class="longitude">Long:</p>
+          <p id="longitude-value" class="longitude-value">--.----</p>
+        </div>
+        <div class="altitude-container">
+          <p class="altitude">Altitude:</p>
+          <p id="altitude-value" class="altitude-value">----m</p>
+        </div>
+      </div>
+      <div  class="camera-container" >
+        <iframe src="http://192.168.137.64:5000/video_feed" width="850px" height="380px" frameborder="0"></iframe>
+
+        <!-- <img class="camera-footage" src="Pictures/Rectangle 1.png" alt=""> -->
+        <!-- <video id="camera-stream" width="100%" height="100%" autoplay loop> -->
+          <!-- <video class="camera-stream" ="camera-stream" width="100%" height="100%" autoplay></video>
+          <source src="sampleVideo.mp4" type="video/mp4">
+        </video> -->
+        <!-- <iframe  src="http://127.0.0.1:1880/ui" width="640" height="480" frameborder="0"></iframe> -->
+      </div>
+      <div id="map" class="map-container">
+        <!-- <img class="map" src="Pictures/Rectangle 7.png" alt=""> -->
+        <!-- <button width="100px" id="fullscreenButton">Enter Fullscreen</button> -->
+        <div id="values-section">
+          <div id="speed-text">
+            <p>Speed: <span id="speed-value"></span></p>
+          </div>
+          <div id="direction-text">
+            <p>Direction: <span id="direction-value">Stop</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="speed-distance-heatmap-controller-container">
+      <div class="speed-distance-container">
+
+      </div>
+      <div  id="heatMap" class="heatMap"></div>
+      <div class="controller-container">
+        <div id="outer-circle" class="outer-circle">
+          <div id="inner-circle" class="inner-circle"></div>
+          <div class="top-ellipse"></div>
+          <div class="right-ellipse"></div>
+          <div class="bottom-ellipse"></div>
+          <div class="left-ellipse"></div>
+          <div class="direction-container">
+            <div class="forward">
+              <button class="forward-direction-button" id="front-direction" onclick="alert('Front Button Clicked!')">
+                <img class="forward-direction" src="Pictures/forward.png" alt="Front Direction Image">
+              </button>
+            </div>
+            <div class="left-right-direction-container">
+              <button class="left-direction-button" id="left-direction" onclick="alert('Left Button Clicked!')">
+                <img class="left-direction" src="Pictures/left.png" alt="Left Direction Image">
+              </button>
+              <button class="right-direction-button" id="right-direction" onclick="alert('Right Button Clicked!')">
+                <img class="right-direction" src="Pictures/right.png" alt="Right Direction Image">
+              </button>
+            </div>
+            <div class="reverse">
+              <button class="reverse-direction-button" id="reverse-direction" onclick="alert('Back Button Clicked!')">
+                <img class="reverse-direction" src="Pictures/reverse.png" alt="Back Direction Image">
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <script src="script.js"></script>
+
+    <script>
+        function loadMaps() {
+            GetMap();
+            GetHeatMap();
+        }
+    </script>
+
+</body>
+<!-- <script src="script.js"></script> -->
+<!-- <script>
+  const bingKey = 'AiiQ9wg3CG2Eo_N5i3t1__j0DMX5otkY9FundxabMXUMKIIhMdxfeDs8LTQWdVCz';
+</script>
+<script src="https://www.bing.com/api/maps/mapcontrol?callback=loadMaps" async defer></script> -->
+
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZA8ppitiT9vhCKQ2tXaeB1JuItzT3iKo&callback=myMap"></script> -->
+
+<!-- <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetHeatMap' async defer></script> -->
+<!-- <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap' async defer></script> -->
+<!-- <script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?key=Ao8j3AY-uXT0No0cOT6p-iURSbsWdYRq7M4H36ll-Tk-mBimGDPo2YntaDsfDj-y"></script> -->
+<!-- <script type="text/javascript" src="https://www.bing.com/api/maps/mapcontrol?key=Ao8j3AY-uXT0No0cOT6p-iURSbsWdYRq7M4H36ll-Tk-mBimGDPo2YntaDsfDj-y"></script> -->
+<!-- https://www.bing.com/api/maps/mapcontrol?key= -->
+
+<!-- <script>
+  // Replace 'YOUR_BING_MAPS_API_KEY' with your actual Bing Maps API key
+  let bingKey = 'Ao8j3AY-uXT0No0cOT6p-iURSbsWdYRq7M4H36ll-Tk-mBimGDPo2YntaDsfDj-y';
+
+  let script = document.createElement("script");
+  script.setAttribute("src", `https://www.bing.com/api/maps/mapcontrol?callback=GetHeatMap&key=${bingKey}`);
+  document.body.appendChild(script);
+</script> -->
+
+
+<!-- <script>
+  // Replace 'YOUR_BING_MAPS_API_KEY' with your actual Bing Maps API key
+  let bingKey1 = 'Ao8j3AY-uXT0No0cOT6p-iURSbsWdYRq7M4H36ll-Tk-mBimGDPo2YntaDsfDj-y';
+
+  let script1 = document.createElement("script");
+  script.setAttribute("src", `https://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=${bingKey1}`);
+  document.body.appendChild(script1);
+</script> -->
+
+<!-- <script>
+  const bingKey = 'Ao8j3AY-uXT0No0cOT6p-iURSbsWdYRq7M4H36ll-Tk-mBimGDPo2YntaDsfDj-y';
+</script>
+<script src="https://www.bing.com/api/maps/mapcontrol?callback=loadMaps" async defer></script> -->
+
+
+</html>
