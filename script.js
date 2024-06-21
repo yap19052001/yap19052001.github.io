@@ -150,7 +150,7 @@ function updateDirectionText(angle) {
 
     }
 }
-const socket = new WebSocket('ws:192.168.137.64:1880/ws/data');
+const socket = new WebSocket('ws:192.168.137.197:1880/ws/data');
 // DATA FORMAT TO SEND TO NODE FOR CONTROLLING WHEEL
 const data = {
     speedValue: 0,
