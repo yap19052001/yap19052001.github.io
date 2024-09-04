@@ -10,6 +10,22 @@ document.getElementById('fullscreenButton').addEventListener('click', function (
     }
 });
 
+//NODE RED
+fetch('https://10.42.0.1:1880')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();  // Or response.json(), response.blob(), etc.
+    })
+    .then(data => {
+        console.log(data);  // Handle the response data here
+    })
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });
+
+
 function usersLocationUpdated() { }
 // function heatMapUpdated() { }
 // function dataForHeatmap() { }
