@@ -11,7 +11,7 @@ document.getElementById('fullscreenButton').addEventListener('click', function (
 });
 
 //NODE RED
-fetch('https://192.168.1.160:1880')
+fetch('https://192.168.1.162:1880')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
