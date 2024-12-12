@@ -231,11 +231,28 @@ body, html {
 }
 
 
+/* .camera-container {
+  width: 56vw;
+  height: 55vh;
+  background-color: rgb(255, 255, 255);
+  overflow: hidden;
+} */
+
+
 .camera-container {
   width: 56vw;
   height: 55vh;
   background-color: rgb(255, 255, 255);
   overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camera-frame {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video content covers the container */
 }
 
 .camera-footage {
