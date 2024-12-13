@@ -76,7 +76,7 @@ function drag(e) {
         innerCircle.style.transform = `translate(${newX}px, ${newY}px)`;
 
         // Update speed value based on distance
-        const distancePercentage = (clampedRadius / maxRadius) * 50;
+        const distancePercentage = (clampedRadius / maxRadius) * 100;
         const speed = Math.round(distancePercentage);
         // console.log("Speed Value" + speed);
 
