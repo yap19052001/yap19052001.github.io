@@ -11,7 +11,7 @@ document.getElementById('fullscreenButton').addEventListener('click', function (
 });
 
 //NODE RED
-fetch('https://192.168.109.241:1880')
+fetch('https://10.249.1.125:1880')
     .then(response => {
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -166,7 +166,7 @@ function updateDirectionText(angle) {
 
     }
 }
-const socket = new WebSocket('wss:192.168.109.241:1880/data');
+const socket = new WebSocket('wss:10.249.1.125:1880/data');
 // DATA FORMAT TO SEND TO NODE FOR CONTROLLING WHEEL
 const data = {
     speedValue: 0,
