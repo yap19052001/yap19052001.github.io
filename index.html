@@ -195,6 +195,15 @@
             GetMap();
             GetHeatMap();
         }
+
+          const feedUrl = "https://c64c-123-63-218-66.ngrok-free.app/video_feed";
+
+    fetch(feedUrl, { mode: 'no-cors' }) // no-cors avoids CORS error in console
+      .finally(() => {
+        document.getElementById("camera-feed").src = feedUrl;
+      });
+  </script>
+  <img id="camera-feed" style="width: 100%; height: auto;" alt="Live Feed">
     </script>
 
 </body>
