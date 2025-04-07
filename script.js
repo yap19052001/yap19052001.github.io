@@ -167,7 +167,7 @@ function updateDirectionText(angle) {
     }
 }
 
-const socket = new WebSocket('https://7edb-123-63-218-66.ngrok-free.app/control');
+const socket = new WebSocket('https://d54e-117-238-101-97.ngrok-free.app/control');
 // const socket = new WebSocket('wss://10.249.1.125:1880/control');
 //const socket = new WebSocket('wss://192.168.205.242:1880/control');
 // DATA FORMAT TO SEND TO NODE FOR CONTROLLING WHEEL
