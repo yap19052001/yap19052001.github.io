@@ -1,0 +1,245 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(30, 30, 30, 1);
+  color: #ffffff;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+:root {
+  --font-inter: Inter;
+
+  --color-white: #fff;
+  --color-chocolate: #e95e02;
+  --color-gainsboro-100: rgba(232, 219, 219, 0.5);
+  --color-gray: rgba(255, 255, 255, 0.5);
+  --color-darkslategray: #363636;
+}
+
+.header-container {
+  position: relative;
+  width: 100vw;
+  height: 10vh;
+  background-color: rgba(54, 54, 54, 1);
+}
+
+.cdac-logo-image {
+  position: absolute;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nbc-controller-report-container {
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nbc-controller {
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  margin-right: 20px;
+}
+
+.report {
+  color: rgb(255, 255, 255);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  margin-left: 20px;
+}
+
+
+
+/* .grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+.h2sCoChart,
+.humidityTempChart,
+.cpmNsvChart,
+.map {
+  height: 40vh;
+  width: 48vw;
+}
+
+.map{
+background-color: #ffffff;
+} */
+
+.grid-container {
+  width: 100vw;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+}
+
+.h2sCoChart,
+.humidityTempChart,
+.cpmNsvChart,
+.map{
+  height: 40vh;
+  width: 50vw;
+}
+
+.map{
+  /* background-color: #ffffff; */
+}
+canvas {
+  background: transparent;
+  border: 1px solid #444;
+  padding: 10px;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+
+/* canvas {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+} */
+
+/* #map {
+  height: 400px;
+  width: 100%;
+} */
+
+.controls {
+  height: 7vh;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* margin-bottom: 20px; */
+}
+
+input[type="file"] {
+  outline: none;
+  padding: 4px;
+  margin: -4px;
+}
+
+input[type="file"]:focus-within::file-selector-button,
+input[type="file"]:focus::file-selector-button {
+  outline: 2px solid #0964b0;
+  outline-offset: 2px;
+}
+
+input[type="file"]::before {
+  top: 16px;
+}
+
+input[type="file"]::after {
+  top: 14px;
+}
+
+/* ------- From Step 2 ------- */
+
+input[type="file"] {
+  position: relative;
+}
+
+input[type="file"]::file-selector-button {
+  width: 136px;
+  color: transparent;
+}
+
+/* Faked label styles and icon */
+input[type="file"]::before {
+  position: absolute;
+  pointer-events: none;
+  /*   top: 11px; */
+  left: 40px;
+  color: #0964b0;
+  content: "Upload File";
+}
+
+input[type="file"]::after {
+  position: absolute;
+  pointer-events: none;
+  /*   top: 10px; */
+  left: 16px;
+  height: 20px;
+  width: 20px;
+  content: "";
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+}
+
+/* ------- From Step 1 ------- */
+
+/* file upload button */
+input[type="file"]::file-selector-button {
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 40px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.05);
+  margin-right: 16px;
+  transition: background-color 200ms;
+}
+
+/* file upload button hover state */
+input[type="file"]::file-selector-button:hover {
+  background-color: #f3f4f6;
+}
+
+/* file upload button active state */
+input[type="file"]::file-selector-button:active {
+  background-color: #e5e7eb;
+}
+
+/* .report {
+  color: rgb(255, 255, 255, 0.5);
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  margin-left: 20px;
+}
+
+  #csvFile {
+    display: block;
+    margin: 10px auto;
+  }
+  
+  #dashboard {
+    margin-top: 20px;
+    padding: 10px;
+  }
+  
+  .gauges, .charts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  canvas {
+    max-width: 400px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  #map {
+    margin: 0 auto;
+    width: 70%;
+    border: 2px solid #333;
+    border-radius: 8px;
+  } */
