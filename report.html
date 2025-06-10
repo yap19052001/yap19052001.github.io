@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sensor Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.1/papaparse.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="reportStyles.css" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  />
+</head>
+<body>
+      <header class="header-container">
+    <img class="cdac-logo-image" alt="C-DAC Logo" src="Pictures/cdac_logo.png" />
+    <div class="nbc-controller-report-container">
+      <a href="index.html" class="nbc-controller">NBC CONTROLLER</a>
+      <a href="report.html" class="report">REPORT</a>
+    </div>
+  </header>
+
+  <div class="controls">
+    <input type="file" id="csvFileInput" accept=".csv" />
+    <label for="xAxisSelector">X-Axis:</label>
+    <select id="xAxisSelector">
+      <option value="time">Time</option>
+      <option value="location">Location</option>
+      <option value="alt">Altitude</option>
+    </select>
+  </div>
+
+  <div class="grid-container">
+  <div class="h2sCoChart"><canvas id="h2sCoChart"></canvas></div>
+  <div class="humidityTempChart"><canvas id="humidityTempChart"></canvas></div>
+  <div class="cpmNsvChart"><canvas id="cpmNsvChart"></canvas></div>
+  <div class="map" id="map"></div>
+</div>
+
+
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+  <script src="reportScript.js"></script>
+</body>
+</html>
