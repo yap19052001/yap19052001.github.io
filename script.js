@@ -1,31 +1,59 @@
 const div = document.getElementById('inner-circle');
 
-// Function to request fullscreen
-function goFullscreen() {
-  if (document.documentElement.requestFullscreen) {
-    document.documentElement.requestFullscreen();
-  } else if (document.documentElement.webkitRequestFullscreen) {
-    document.documentElement.webkitRequestFullscreen();
-  } else if (document.documentElement.msRequestFullscreen) {
-    document.documentElement.msRequestFullscreen();
+// Function to toggle fullscreen
+function toggleFullscreen() {
+  if (
+    document.fullscreenElement || 
+    document.webkitFullscreenElement || 
+    document.mozFullScreenElement || 
+    document.msFullscreenElement
+  ) {
+    // Exit fullscreen
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  } else {
+    // Enter fullscreen
+    if (document.documentElement.requestFullscreen) {
+      document.documentElement.requestFullscreen();
+    } else if (document.documentElement.webkitRequestFullscreen) {
+      document.documentElement.webkitRequestFullscreen();
+    } else if (document.documentElement.mozRequestFullScreen) {
+      document.documentElement.mozRequestFullScreen();
+    } else if (document.documentElement.msRequestFullscreen) {
+      document.documentElement.msRequestFullscreen();
+    }
   }
 }
 
-// Handle double-click for desktop
-div.addEventListener('dblclick', goFullscreen);
+// Handle double-click (desktop)
+div.addEventListener('dblclick', toggleFullscreen);
 
-// Handle double-tap for touch screens
+// Handle double-tap (touchscreen)
 let lastTap = 0;
 div.addEventListener('touchend', function (e) {
   const currentTime = new Date().getTime();
   const tapLength = currentTime - lastTap;
 
   if (tapLength > 0 && tapLength < 300) {
-    goFullscreen();
-    e.preventDefault(); // Optional: prevent ghost clicks
+    toggleFullscreen();
+    e.preventDefault(); // prevent ghost clicks
   }
 
   lastTap = currentTime;
+});
+
+// Optional: handle Enter or Space for accessibility
+div.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' || e.key === ' ') {
+    toggleFullscreen();
+  }
 });
 
 function usersLocationUpdated() { }
