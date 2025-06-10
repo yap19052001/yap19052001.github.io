@@ -1,30 +1,32 @@
-document.getElementById('fullscreenButton').addEventListener('click', function () {
-    if (document.documentElement.requestFullscreen) {
-        document.documentElement.requestFullscreen();
-    } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-        document.documentElement.mozRequestFullScreen();
-    } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-        document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-        document.documentElement.msRequestFullscreen();
-    }
+const div = document.getElementById('inner-circle');
+
+// Function to request fullscreen
+function goFullscreen() {
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  } else if (document.documentElement.webkitRequestFullscreen) {
+    document.documentElement.webkitRequestFullscreen();
+  } else if (document.documentElement.msRequestFullscreen) {
+    document.documentElement.msRequestFullscreen();
+  }
+}
+
+// Handle double-click for desktop
+div.addEventListener('dblclick', goFullscreen);
+
+// Handle double-tap for touch screens
+let lastTap = 0;
+div.addEventListener('touchend', function (e) {
+  const currentTime = new Date().getTime();
+  const tapLength = currentTime - lastTap;
+
+  if (tapLength > 0 && tapLength < 300) {
+    goFullscreen();
+    e.preventDefault(); // Optional: prevent ghost clicks
+  }
+
+  lastTap = currentTime;
 });
-
-// //NODE RED
-// fetch('https://10.249.1.125:1880')
-//     .then(response => {
-//         if (!response.ok) {
-//             throw new Error('Network response was not ok');
-//         }
-//         return response.text();  // Or response.json(), response.blob(), etc.
-//     })
-//     .then(data => {
-//         console.log(data);  // Handle the response data here
-//     })
-//     .catch(error => {
-//         console.error('There has been a problem with your fetch operation:', error);
-//     });
-
 
 function usersLocationUpdated() { }
 // function heatMapUpdated() { }
