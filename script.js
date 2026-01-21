@@ -197,8 +197,8 @@ function updateDirectionText(angle) {
     }
 }
 
-const socket = new WebSocket('https://bedford-cyber-insured-rooms.trycloudflare.com/control');
-// const socket = new WebSocket('wss://10.249.1.125:1880/control');
+// const socket = new WebSocket('https://bedford-cyber-insured-rooms.trycloudflare.com/control');
+const socket = new WebSocket('wss://10.248.2.78:1880/control');
 //const socket = new WebSocket('wss://192.168.205.242:1880/control');
 // DATA FORMAT TO SEND TO NODE FOR CONTROLLING WHEEL
 const data = {
@@ -405,85 +405,85 @@ function heatmapdata(latitude, longitude, radiation) {
 
 
 
-// ======================================
-// LATENCY CSV LOGGER (SEPARATE SOCKET)
-// ======================================
+// // ======================================
+// // LATENCY CSV LOGGER (SEPARATE SOCKET)
+// // ======================================
 
-// Use a SEPARATE WebSocket for latency
-const LATENCY_WS = 'wss:bedford-cyber-insured-rooms.trycloudflare.com/latency';
-console.log("Latency");
+// // Use a SEPARATE WebSocket for latency
+// const LATENCY_WS = 'wss:bedford-cyber-insured-rooms.trycloudflare.com/latency';
+// console.log("Latency");
 
-let latencySocket = null;
-let latencyData = [];
-let latencyTimer = null;
+// let latencySocket = null;
+// let latencyData = [];
+// let latencyTimer = null;
 
-// How long to run test
-const TEST_DURATION = 10000; // 10 seconds
-const SEND_INTERVAL = 1000;  // 1 second
+// // How long to run test
+// const TEST_DURATION = 10000; // 10 seconds
+// const SEND_INTERVAL = 1000;  // 1 second
 
-function convertNodeTimestamp(t) {
-    return t - performance.timing.navigationStart;
-}
+// function convertNodeTimestamp(t) {
+//     return t - performance.timing.navigationStart;
+// }
 
-function startLatencyTest() {
+// function startLatencyTest() {
 
-    latencyData = [];
-    latencySocket = new WebSocket(LATENCY_WS);
+//     latencyData = [];
+//     latencySocket = new WebSocket(LATENCY_WS);
 
-    latencySocket.onopen = () => {
-        console.log("Latency socket open");
+//     latencySocket.onopen = () => {
+//         console.log("Latency socket open");
 
-        latencyTimer = setInterval(() => {
-            let now = performance.now();
-            latencySocket.send(JSON.stringify({
-                client_send_time: now,
-                latency_test: true
-            }));
-        }, SEND_INTERVAL);
-    };
+//         latencyTimer = setInterval(() => {
+//             let now = performance.now();
+//             latencySocket.send(JSON.stringify({
+//                 client_send_time: now,
+//                 latency_test: true
+//             }));
+//         }, SEND_INTERVAL);
+//     };
 
-    latencySocket.onmessage = (event) => {
-        const data = JSON.parse(event.data);
+//     latencySocket.onmessage = (event) => {
+//         const data = JSON.parse(event.data);
 
-        // Ignore non-latency messages
-        if (!data.latency_test) return;
+//         // Ignore non-latency messages
+//         if (!data.latency_test) return;
 
-        let t0 = data.client_send_time;
-        let t1 = convertNodeTimestamp(data.node_received_time);
-        let t2 = performance.now();
+//         let t0 = data.client_send_time;
+//         let t1 = convertNodeTimestamp(data.node_received_time);
+//         let t2 = performance.now();
 
-        latencyData.push({
-            upload: (t1 - t0).toFixed(3),
-            download: (t2 - t1).toFixed(3),
-            rtt: (t2 - t0).toFixed(3)
-        });
-    };
+//         latencyData.push({
+//             upload: (t1 - t0).toFixed(3),
+//             download: (t2 - t1).toFixed(3),
+//             rtt: (t2 - t0).toFixed(3)
+//         });
+//     };
 
-    setTimeout(stopLatencyTest, TEST_DURATION);
-}
+//     setTimeout(stopLatencyTest, TEST_DURATION);
+// }
 
-function stopLatencyTest() {
-    clearInterval(latencyTimer);
-    if (latencySocket) latencySocket.close();
-    downloadLatencyCSV();
-}
+// function stopLatencyTest() {
+//     clearInterval(latencyTimer);
+//     if (latencySocket) latencySocket.close();
+//     downloadLatencyCSV();
+// }
 
-function downloadLatencyCSV() {
-    let csv = "upload_ms,download_ms,rtt_ms\n";
+// function downloadLatencyCSV() {
+//     let csv = "upload_ms,download_ms,rtt_ms\n";
 
-    latencyData.forEach(row => {
-        csv += `${row.upload},${row.download},${row.rtt}\n`;
-    });
+//     latencyData.forEach(row => {
+//         csv += `${row.upload},${row.download},${row.rtt}\n`;
+//     });
 
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "latency_results.csv";
-    a.click();
-    URL.revokeObjectURL(url);
+//     const blob = new Blob([csv], { type: "text/csv" });
+//     const url = URL.createObjectURL(blob);
+//     const a = document.createElement("a");
+//     a.href = url;
+//     a.download = "latency_results.csv";
+//     a.click();
+//     URL.revokeObjectURL(url);
 
-    console.log("Latency CSV downloaded:", latencyData.length, "rows");
-}
+//     console.log("Latency CSV downloaded:", latencyData.length, "rows");
+// }
 
-startLatencyTest();
+// startLatencyTest();
